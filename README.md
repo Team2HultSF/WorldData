@@ -1,5 +1,3 @@
 # WorldData
-LA and North America
-hjh
-jhkjjh;k
-;kjk
+# LA and North America
+
