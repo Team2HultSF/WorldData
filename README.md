@@ -44,3 +44,18 @@ def section_selection():
 
 # def analysis_choice():
 import_data()
+
+
+#Create file only for our region
+
+import pandas as pd
+
+professor_file = pd.read_excel("WDIW_Dataset.xlsx")
+
+dfs = professor_file
+
+dfs = dfs[dfs['Hult Region'] == 'North America & Part of Latin America']
+
+#Updating the excel sheet with the updated DataFrame
+
+dfs.to_excel("Region_Dataset.xlsx",sheet_name='Sheet1',index=False)
