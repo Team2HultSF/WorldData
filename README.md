@@ -44,3 +44,41 @@ def section_selection():
 
 # def analysis_choice():
 import_data()
+
+import pandas as pd
+import numpy as np
+import seaborn as sns
+world_data = pd.read_excel('WDIW Dataset.xlsx', index_col = 'Country Name',
+                              na_values= ' ')
+missing_data = pd.read_excel('After missing data ver.1.xlsx', sheet_name = 'final dataset', index_col = 'Country Name')
+s = world_data[world_data ['Cool Name'] == 'Hot Rod']
+s1 = s.iloc [0:1
+             ,1]
+print (s1)
+s = s.drop(['Cool Name', 'Hult Region','Country Code'], axis = 1)
+s = s.drop(['Bermuda'])
+print(s.shape)
+print(missing_data.shape)
+print(s.isnull().sum().sum())
+final_dataset = pd.merge(s,missing_data)
+print (final_dataset.shape)
+print(final_dataset.isnull().sum().sum())
+final_dataset1 = final_dataset.dropna(axis=1,how='all')
+print (final_dataset1.shape)
+education = ['Age dependency ratio (% of working-age population)', 'Age dependency ratio, old (% of working-age population)'
+ , 'Age dependency ratio, young (% of working-age population)' , 'GDP (current US$)' , 'GDP growth (annual %)' , 'Industry (including construction), value added (% of GDP)' ,
+             'Agriculture, forestry, and fishing, value added (% of GDP)' , 'Merchandise trade (% of GDP)' , 'Military expenditure (% of GDP)' , 
+             'Services, value added (% of GDP)' , 'Population ages 15-64 (% of total population)' , 'Population ages 65 and above (% of total population)' , 'Population density (people per sq. km of land area)' , 
+             'Population growth (annual %)' , 'Employment in services (% of total employment) (modeled ILO estimate)' , 'Population, total',
+             'Unemployment rate (%)' , 'Education Expenditure (M.$)' , 'Education Expenditure (%GDP)']
+education_dataset = final_dataset1.loc[: , education]
+print (education_dataset.shape)
+education_corr = education_dataset.corr().round(2)
+
+sns.heatmap(data       = education_corr,
+            cmap       = 'Blues',
+            square     = True,
+            annot      = False,
+            linecolor  = 'black',
+            linewidths = 0.5)
+plt.show()
