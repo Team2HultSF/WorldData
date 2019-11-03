@@ -44,3 +44,22 @@ def section_selection():
 
 # def analysis_choice():
 import_data()
+
+# only for the missing datasets
+import pandas as pd
+import numpy as np
+world_data = pd.read_excel('WDIW Dataset.xlsx', index_col = 'Country Name',
+                              na_values= ' ')
+missing_data = pd.read_excel('After missing data ver.1.xlsx', sheet_name = 'final dataset', index_col = 'Country Name')
+s = world_data[world_data ['Cool Name'] == 'Hot Rod']
+s1 = s.iloc [0:1
+             ,1]
+print (s1)
+s = s.drop(['Cool Name', 'Hult Region','Country Code'], axis = 1)
+print(s.columns)
+print(s.shape)
+print(missing_data.columns)
+print(s.isnull().sum().sum())
+final_dataset = pd.merge(s,missing_data)
+print (final_dataset.columns)
+print(final_dataset.isnull().sum().sum())
